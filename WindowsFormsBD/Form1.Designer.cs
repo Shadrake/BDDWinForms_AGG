@@ -80,7 +80,7 @@
             this.btnInsert1.Name = "btnInsert1";
             this.btnInsert1.Size = new System.Drawing.Size(237, 28);
             this.btnInsert1.TabIndex = 3;
-            this.btnInsert1.Text = "Insertar nuevo job (1)";
+            this.btnInsert1.Text = "Insertar valores concretos (Job1)";
             this.btnInsert1.UseVisualStyleBackColor = true;
             this.btnInsert1.Click += new System.EventHandler(this.btnInsert1_Click);
             // 
@@ -90,7 +90,7 @@
             this.btnInsert2.Name = "btnInsert2";
             this.btnInsert2.Size = new System.Drawing.Size(237, 28);
             this.btnInsert2.TabIndex = 3;
-            this.btnInsert2.Text = "Insertar nuevo job (2)";
+            this.btnInsert2.Text = "Insertar valores de usuario (Job2)";
             this.btnInsert2.UseVisualStyleBackColor = true;
             this.btnInsert2.Click += new System.EventHandler(this.btnInsert2_Click);
             // 
@@ -164,7 +164,7 @@
             this.btnInsert3.Name = "btnInsert3";
             this.btnInsert3.Size = new System.Drawing.Size(237, 28);
             this.btnInsert3.TabIndex = 3;
-            this.btnInsert3.Text = "Insertar nuevo job (3)";
+            this.btnInsert3.Text = "Insertar objeto Job (Job3)";
             this.btnInsert3.UseVisualStyleBackColor = true;
             this.btnInsert3.Click += new System.EventHandler(this.btnInsert3_Click);
             // 
@@ -174,7 +174,7 @@
             this.btnInsert4.Name = "btnInsert4";
             this.btnInsert4.Size = new System.Drawing.Size(237, 28);
             this.btnInsert4.TabIndex = 3;
-            this.btnInsert4.Text = "Insertar nuevo job (4)";
+            this.btnInsert4.Text = "Insertar Job con parámetros (Job4)";
             this.btnInsert4.UseVisualStyleBackColor = true;
             this.btnInsert4.Click += new System.EventHandler(this.btnInsert4_Click);
             // 

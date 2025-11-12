@@ -33,14 +33,19 @@ namespace WindowsFormsBD.DAL
             // con parámetros NULLables
             try
             {
-                string sql = $@"
+                string sql = @"
 INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
-VALUES ('{title}', {minSalary}, {maxSalary})";
+VALUES (@job_title, @min_salary, @max_salary)";
 
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
 
                 if (connection.State != ConnectionState.Open)
                     connection.Open();
+
+                // Asignar parámetros, controlando valores nulos
+                sqlCommand.Parameters.AddWithValue("@job_title", title);
+                sqlCommand.Parameters.AddWithValue("@min_salary", (object)minSalary ?? DBNull.Value);
+                sqlCommand.Parameters.AddWithValue("@max_salary", (object)maxSalary ?? DBNull.Value);
 
                 int num = sqlCommand.ExecuteNonQuery();
                 //MessageBox.Show($"{num} filas insertadas!");
@@ -49,6 +54,60 @@ VALUES ('{title}', {minSalary}, {maxSalary})";
             {
                 return false;
             }
+            return true;
+        }
+
+        // ** 4a parte **
+        public bool InsertJob3(Job job)
+        {
+            // con objeto Job, y control de NULLs
+            try
+            {
+                string sql = @"
+INSERT INTO jobs ([job_title], [min_salary], [max_salary])
+VALUES (@job_title, @min_salary, @max_salary)";
+
+                SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
+                sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
+                sqlCommand.Parameters.AddWithValue("@max_salary", (object)job.max_salary ?? DBNull.Value);
+
+                int num = sqlCommand.ExecuteNonQuery();
+                //MessageBox.Show($"{num} filas insertadas!");
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        // ** 5a parte **
+        public bool InsertJob4(Job job)
+        {
+            // con parametros SQL y objeto Job, y control de NULLs
+            try
+            {
+                string sql = @"
+INSERT INTO jobs ([job_title], [min_salary], [max_salary])
+VALUES (@job_title, @min_salary, @max_salary)";
+
+                SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
+                sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
+                sqlCommand.Parameters.AddWithValue("@max_salary", (object)job.max_salary ?? DBNull.Value);
+
+                int num = sqlCommand.ExecuteNonQuery();
+                //MessageBox.Show($"{num} filas insertadas!");
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
             return true;
         }
     }

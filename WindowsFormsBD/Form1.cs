@@ -108,7 +108,7 @@ namespace BDDWinForms_AGG
         }
 
         private Job LeerJob()
-        {             
+        {
             // txtJobTitle, txtMinSalary, txtMaxSalary
             string title = txtTitle.Text.Trim();
             if (string.IsNullOrEmpty(title))
@@ -145,21 +145,45 @@ namespace BDDWinForms_AGG
             };
             return job;
         }
+
+        // ** 4a parte **
         private void btnInsert3_Click(object sender, EventArgs e)
         {
-            // con objeto Job
+            // Crear el objeto Job a partir de los TextBox
             Job j = LeerJob();
 
-            if (j == null || !InsertarJobV3(j))
+            if (j == null)
+            {
+                MessageBox.Show("Error al leer el puesto.");
+                return;
+            }
+
+            // Crear instancia del DAL
+            JobDAL dal = new JobDAL();
+
+            // Llamar al método que inserta un objeto Job
+            if (!dal.InsertJob3(j))
                 MessageBox.Show("Error al insertar el puesto.");
+            else
+                MessageBox.Show("Puesto insertado correctamente.");
         }
 
+        // ** 5a parte **
         private void btnInsert4_Click(object sender, EventArgs e)
         {
             // con parametros SQL
             Job j = LeerJob();
-            if (j == null || !InsertarJobV4(j))
+            if (j == null)
+            {
+                MessageBox.Show("Error al leer el puesto.");
+                return;
+            }
+
+            JobDAL dal = new JobDAL();
+            if (!dal.InsertJob4(j))
                 MessageBox.Show("Error al insertar el puesto.");
+            else
+                MessageBox.Show("Puesto insertado correctamente.");
         }
 
         // ** 2a parte **
@@ -187,79 +211,5 @@ VALUES ('Software Developer', 60000, 120000)";
 
             return true;
         }
-
-        // ** 3a parte **
-        public bool InsertJob2(string title, decimal? minSalary, decimal? maxSalary)
-        {
-            // Gestionar valores nulos: NULL vs null, usando parámetros SQL
-            try
-            {
-                string sql = @"
-INSERT INTO jobs ([job_title], [min_salary], [max_salary])
-VALUES (@job_title, @min_salary, @max_salary)";
-
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
-                // Asignar parámetros, controlando valores nulos
-                sqlCommand.Parameters.AddWithValue("@job_title", title);
-                sqlCommand.Parameters.AddWithValue("@min_salary", (object)minSalary ?? DBNull.Value);
-                sqlCommand.Parameters.AddWithValue("@max_salary", (object)maxSalary ?? DBNull.Value);
-
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-
-            return true;
-        }
-        private bool InsertarJobV3(Job job)
-        {
-            // con objeto Job, y control de NULLs
-            try
-            {
-                string sql = $@"
-INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
-VALUES ('{job.job_title}', 
-        {(job.min_salary == null ? "NULL" : job.min_salary.ToString())}, 
-        {(job.max_salary == null ? "NULL" : job.max_salary.ToString())})";
-
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            return true;
-        }
-        private bool InsertarJobV4(Job job)
-        {
-            // con parametros SQL y objeto Job, y control de NULLs
-            try
-            {
-                string sql = $@"
-INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
-VALUES ( @job_title, @min_salary, @max_salary)";
-
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-                sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
-                sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
-                sqlCommand.Parameters.AddWithValue("@max_salary", (object)job.max_salary ?? DBNull.Value);
-
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-            return true;
-        }
-
     }
 }
