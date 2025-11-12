@@ -1,11 +1,7 @@
 ﻿using BDDWinForms_AGG.Models;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WindowsFormsBD.DAL
 {
@@ -27,14 +23,38 @@ namespace WindowsFormsBD.DAL
         }
 
         // ** 2a parte **
-        // Añadir un método InsertarJobV2()
-        public bool InsertJob2(string title, decimal? minSalary, decimal? maxSalary)
+        // Insertar valores concretos (hard coded)
+        public bool InsertJob1()
         {
-            // con parámetros NULLables
             try
             {
                 string sql = @"
 INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
+VALUES ('Software Developer', 60000, 120000)";
+
+                SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
+
+                int num = sqlCommand.ExecuteNonQuery();
+                //MessageBox.Show($"{num} filas insertadas!");
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        // ** 3a parte **
+        // Insertar Job con parámetros NULLables
+        public bool InsertJob2(string title, decimal? minSalary, decimal? maxSalary)
+        {
+            try
+            {
+                string sql = @"
+INSERT INTO jobs ([job_title], [min_salary], [max_salary])
 VALUES (@job_title, @min_salary, @max_salary)";
 
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
@@ -42,7 +62,6 @@ VALUES (@job_title, @min_salary, @max_salary)";
                 if (connection.State != ConnectionState.Open)
                     connection.Open();
 
-                // Asignar parámetros, controlando valores nulos
                 sqlCommand.Parameters.AddWithValue("@job_title", title);
                 sqlCommand.Parameters.AddWithValue("@min_salary", (object)minSalary ?? DBNull.Value);
                 sqlCommand.Parameters.AddWithValue("@max_salary", (object)maxSalary ?? DBNull.Value);
@@ -58,9 +77,9 @@ VALUES (@job_title, @min_salary, @max_salary)";
         }
 
         // ** 4a parte **
+        // Insertar Job con objeto Job y control de NULLs
         public bool InsertJob3(Job job)
         {
-            // con objeto Job, y control de NULLs
             try
             {
                 string sql = @"
@@ -68,6 +87,9 @@ INSERT INTO jobs ([job_title], [min_salary], [max_salary])
 VALUES (@job_title, @min_salary, @max_salary)";
 
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
 
                 sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
                 sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
@@ -80,14 +102,13 @@ VALUES (@job_title, @min_salary, @max_salary)";
             {
                 return false;
             }
-
             return true;
         }
 
         // ** 5a parte **
+        // Insertar Job con parámetros SQL y objeto Job
         public bool InsertJob4(Job job)
         {
-            // con parametros SQL y objeto Job, y control de NULLs
             try
             {
                 string sql = @"
@@ -95,6 +116,9 @@ INSERT INTO jobs ([job_title], [min_salary], [max_salary])
 VALUES (@job_title, @min_salary, @max_salary)";
 
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                if (connection.State != ConnectionState.Open)
+                    connection.Open();
 
                 sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
                 sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
@@ -107,7 +131,6 @@ VALUES (@job_title, @min_salary, @max_salary)";
             {
                 return false;
             }
-
             return true;
         }
     }
