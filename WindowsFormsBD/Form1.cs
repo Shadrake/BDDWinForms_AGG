@@ -13,10 +13,10 @@ namespace BDDWinForms_AGG
         SqlConnection connection = null;
 
         // Definir cadena de conexión, parametros de acceso
-        string ConStr = "Server=46.183.118.102,54321;" +
+        string ConStr = "Server=serverName;" +
             "Database=AbrilEmpleados;" +
-            "User Id=sa;" +
-            "Password=Sql#123456789;" +
+            "User Id=user;" +
+            "Password=serverPass;" +
             "TrustServerCertificate=true";
 
         public Form1()
