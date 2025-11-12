@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WindowsFormsBD
+namespace BDDWinForms_AGG.Models
 {
     public class Job
     {

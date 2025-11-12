@@ -1,4 +1,4 @@
-﻿namespace WindowsFormsBD
+﻿namespace BDDWinForms_AGG
 {
     partial class Form1
     {
@@ -28,32 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.butOpen = new System.Windows.Forms.Button();
+            this.btnOpen = new System.Windows.Forms.Button();
             this.labMessage = new System.Windows.Forms.Label();
-            this.butClose = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
             this.btnInsert1 = new System.Windows.Forms.Button();
             this.btnInsert2 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grboxJob2 = new System.Windows.Forms.GroupBox();
             this.txtMax = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblMax = new System.Windows.Forms.Label();
             this.txtMin = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblMin = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.btnInsert3 = new System.Windows.Forms.Button();
             this.btnInsert4 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.grboxJob2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // butOpen
+            // btnOpen
             // 
-            this.butOpen.Location = new System.Drawing.Point(12, 71);
-            this.butOpen.Name = "butOpen";
-            this.butOpen.Size = new System.Drawing.Size(95, 41);
-            this.butOpen.TabIndex = 0;
-            this.butOpen.Text = "Abrir Cnx";
-            this.butOpen.UseVisualStyleBackColor = true;
-            this.butOpen.Click += new System.EventHandler(this.butOpen_Click);
+            this.btnOpen.Location = new System.Drawing.Point(12, 71);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(95, 41);
+            this.btnOpen.TabIndex = 0;
+            this.btnOpen.Text = "Conectar";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.btnOpen_Click);
             // 
             // labMessage
             // 
@@ -63,16 +63,16 @@
             this.labMessage.Size = new System.Drawing.Size(237, 34);
             this.labMessage.TabIndex = 1;
             // 
-            // butClose
+            // btnClose
             // 
-            this.butClose.Enabled = false;
-            this.butClose.Location = new System.Drawing.Point(154, 71);
-            this.butClose.Name = "butClose";
-            this.butClose.Size = new System.Drawing.Size(95, 41);
-            this.butClose.TabIndex = 2;
-            this.butClose.Text = "Cerrar cnx";
-            this.butClose.UseVisualStyleBackColor = true;
-            this.butClose.Click += new System.EventHandler(this.butClose_Click);
+            this.btnClose.Enabled = false;
+            this.btnClose.Location = new System.Drawing.Point(154, 71);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(95, 41);
+            this.btnClose.TabIndex = 2;
+            this.btnClose.Text = "Desconectar";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnInsert1
             // 
@@ -80,7 +80,7 @@
             this.btnInsert1.Name = "btnInsert1";
             this.btnInsert1.Size = new System.Drawing.Size(237, 28);
             this.btnInsert1.TabIndex = 3;
-            this.btnInsert1.Text = "Insertar un nuevo job (V1)";
+            this.btnInsert1.Text = "Insertar nuevo job (1)";
             this.btnInsert1.UseVisualStyleBackColor = true;
             this.btnInsert1.Click += new System.EventHandler(this.btnInsert1_Click);
             // 
@@ -90,25 +90,25 @@
             this.btnInsert2.Name = "btnInsert2";
             this.btnInsert2.Size = new System.Drawing.Size(237, 28);
             this.btnInsert2.TabIndex = 3;
-            this.btnInsert2.Text = "Insertar un nuevo job (V2)";
+            this.btnInsert2.Text = "Insertar nuevo job (2)";
             this.btnInsert2.UseVisualStyleBackColor = true;
             this.btnInsert2.Click += new System.EventHandler(this.btnInsert2_Click);
             // 
-            // groupBox1
+            // grboxJob2
             // 
-            this.groupBox1.Controls.Add(this.txtMax);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtMin);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtTitle);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(286, 77);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(353, 126);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Job V2+";
+            this.grboxJob2.Controls.Add(this.txtMax);
+            this.grboxJob2.Controls.Add(this.lblMax);
+            this.grboxJob2.Controls.Add(this.txtMin);
+            this.grboxJob2.Controls.Add(this.lblMin);
+            this.grboxJob2.Controls.Add(this.txtTitle);
+            this.grboxJob2.Controls.Add(this.lblTitle);
+            this.grboxJob2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grboxJob2.Location = new System.Drawing.Point(286, 77);
+            this.grboxJob2.Name = "grboxJob2";
+            this.grboxJob2.Size = new System.Drawing.Size(353, 126);
+            this.grboxJob2.TabIndex = 4;
+            this.grboxJob2.TabStop = false;
+            this.grboxJob2.Text = "Job 2+";
             // 
             // txtMax
             // 
@@ -117,14 +117,14 @@
             this.txtMax.Size = new System.Drawing.Size(145, 22);
             this.txtMax.TabIndex = 3;
             // 
-            // label3
+            // lblMax
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 90);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 16);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Max:";
+            this.lblMax.AutoSize = true;
+            this.lblMax.Location = new System.Drawing.Point(22, 90);
+            this.lblMax.Name = "lblMax";
+            this.lblMax.Size = new System.Drawing.Size(35, 16);
+            this.lblMax.TabIndex = 0;
+            this.lblMax.Text = "Max:";
             // 
             // txtMin
             // 
@@ -133,14 +133,14 @@
             this.txtMin.Size = new System.Drawing.Size(145, 22);
             this.txtMin.TabIndex = 2;
             // 
-            // label2
+            // lblMin
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 65);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Min:";
+            this.lblMin.AutoSize = true;
+            this.lblMin.Location = new System.Drawing.Point(22, 65);
+            this.lblMin.Name = "lblMin";
+            this.lblMin.Size = new System.Drawing.Size(31, 16);
+            this.lblMin.TabIndex = 0;
+            this.lblMin.Text = "Min:";
             // 
             // txtTitle
             // 
@@ -149,14 +149,14 @@
             this.txtTitle.Size = new System.Drawing.Size(235, 22);
             this.txtTitle.TabIndex = 1;
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Title:";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Location = new System.Drawing.Point(22, 37);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(36, 16);
+            this.lblTitle.TabIndex = 0;
+            this.lblTitle.Text = "Title:";
             // 
             // btnInsert3
             // 
@@ -164,7 +164,7 @@
             this.btnInsert3.Name = "btnInsert3";
             this.btnInsert3.Size = new System.Drawing.Size(237, 28);
             this.btnInsert3.TabIndex = 3;
-            this.btnInsert3.Text = "Insertar un nuevo job (V3)";
+            this.btnInsert3.Text = "Insertar nuevo job (3)";
             this.btnInsert3.UseVisualStyleBackColor = true;
             this.btnInsert3.Click += new System.EventHandler(this.btnInsert3_Click);
             // 
@@ -174,7 +174,7 @@
             this.btnInsert4.Name = "btnInsert4";
             this.btnInsert4.Size = new System.Drawing.Size(237, 28);
             this.btnInsert4.TabIndex = 3;
-            this.btnInsert4.Text = "Insertar un nuevo job (V4)";
+            this.btnInsert4.Text = "Insertar nuevo job (4)";
             this.btnInsert4.UseVisualStyleBackColor = true;
             this.btnInsert4.Click += new System.EventHandler(this.btnInsert4_Click);
             // 
@@ -183,36 +183,36 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 285);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grboxJob2);
             this.Controls.Add(this.btnInsert4);
             this.Controls.Add(this.btnInsert3);
             this.Controls.Add(this.btnInsert2);
             this.Controls.Add(this.btnInsert1);
-            this.Controls.Add(this.butClose);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.labMessage);
-            this.Controls.Add(this.butOpen);
+            this.Controls.Add(this.btnOpen);
             this.Name = "Form1";
-            this.Text = "Forma Principal";
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Text = "Form1";
+            this.grboxJob2.ResumeLayout(false);
+            this.grboxJob2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button butOpen;
+        private System.Windows.Forms.Button btnOpen;
         private System.Windows.Forms.Label labMessage;
-        private System.Windows.Forms.Button butClose;
+        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnInsert1;
         private System.Windows.Forms.Button btnInsert2;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grboxJob2;
         private System.Windows.Forms.TextBox txtMax;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblMax;
         private System.Windows.Forms.TextBox txtMin;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblMin;
         private System.Windows.Forms.TextBox txtTitle;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnInsert3;
         private System.Windows.Forms.Button btnInsert4;
     }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsBD.Properties
+namespace BDDWinForms_AGG.Properties
 {
 
 

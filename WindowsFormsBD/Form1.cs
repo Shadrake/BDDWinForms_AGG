@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BDDWinForms_AGG.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,9 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsBD.DAL;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace WindowsFormsBD
+namespace BDDWinForms_AGG
 {
     public partial class Form1 : Form
     {
@@ -30,7 +32,7 @@ namespace WindowsFormsBD
             InitializeComponent();
         }
 
-        private void butOpen_Click(object sender, EventArgs e)
+        private void btnOpen_Click(object sender, EventArgs e)
         {
             // Usar calse SqlConnection, dentro de try/catch
             try
@@ -38,23 +40,23 @@ namespace WindowsFormsBD
                 if (connection.State != ConnectionState.Open)
                     connection.Open();
                 labMessage.Text = "¡Conexión establecida!";
-                butOpen.Enabled = false;
-                butClose.Enabled = true;
+                btnOpen.Enabled = false;
+                btnClose.Enabled = true;
             }
             catch (Exception ex)
             {
                 labMessage.Text = "¡Error de conexión!";
             }
         }
-        private void butClose_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             try
             {
                 if (connection.State != ConnectionState.Closed)
                     connection.Close();
                 labMessage.Text = "Conexión cerrada.";
-                butOpen.Enabled = true;
-                butClose.Enabled = false;
+                btnOpen.Enabled = true;
+                btnClose.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -96,8 +98,13 @@ namespace WindowsFormsBD
                     maxSalary = valorLeido;
             }
 
-            if(!InsertarJobV2(title, minSalary, maxSalary))
+            // Crear una instancia del DAL y llamar al método
+            JobDAL dal = new JobDAL();
+
+            if (!dal.InsertJob2(title, minSalary, maxSalary))
                 MessageBox.Show("Error al insertar el puesto.");
+            else
+                MessageBox.Show("Puesto insertado correctamente.");
         }
 
         private Job LeerJob()
@@ -159,15 +166,17 @@ namespace WindowsFormsBD
         // Añadir un metodo Insertar()
         private bool InsertJob1()
         {
-            // insert fijo
+            // usar  try/catch/finally
             try
             {
+                // codigo SQL, INSERT INTO en tabla jobs
                 string sql = @"
 INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
 VALUES ('Software Developer', 60000, 120000)";
 
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
 
+                // usar SqlCommand, metodo ExecuteNonQuery
                 int num = sqlCommand.ExecuteNonQuery();
                 //MessageBox.Show($"{num} filas insertadas!");
             }
@@ -178,16 +187,23 @@ VALUES ('Software Developer', 60000, 120000)";
 
             return true;
         }
-        private bool InsertarJobV2(string title, decimal? minSalary, decimal? maxSalary)
+
+        // ** 3a parte **
+        public bool InsertJob2(string title, decimal? minSalary, decimal? maxSalary)
         {
-            // con parámetros NULLables
+            // Gestionar valores nulos: NULL vs null, usando parámetros SQL
             try
             {
-                string sql = $@"
-INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
-VALUES ('{title}', {minSalary}, {maxSalary})";
+                string sql = @"
+INSERT INTO jobs ([job_title], [min_salary], [max_salary])
+VALUES (@job_title, @min_salary, @max_salary)";
 
                 SqlCommand sqlCommand = new SqlCommand(sql, connection);
+
+                // Asignar parámetros, controlando valores nulos
+                sqlCommand.Parameters.AddWithValue("@job_title", title);
+                sqlCommand.Parameters.AddWithValue("@min_salary", (object)minSalary ?? DBNull.Value);
+                sqlCommand.Parameters.AddWithValue("@max_salary", (object)maxSalary ?? DBNull.Value);
 
                 int num = sqlCommand.ExecuteNonQuery();
                 //MessageBox.Show($"{num} filas insertadas!");
@@ -196,6 +212,7 @@ VALUES ('{title}', {minSalary}, {maxSalary})";
             {
                 return false;
             }
+
             return true;
         }
         private bool InsertarJobV3(Job job)
