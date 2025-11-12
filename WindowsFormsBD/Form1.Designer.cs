@@ -42,12 +42,15 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnInsert3 = new System.Windows.Forms.Button();
             this.btnInsert4 = new System.Windows.Forms.Button();
+            this.listBoxJobs = new System.Windows.Forms.ListBox();
+            this.btnLoadJobs = new System.Windows.Forms.Button();
+            this.btnUpdateJob = new System.Windows.Forms.Button();
             this.grboxJob2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnOpen
             // 
-            this.btnOpen.Location = new System.Drawing.Point(12, 71);
+            this.btnOpen.Location = new System.Drawing.Point(201, 78);
             this.btnOpen.Name = "btnOpen";
             this.btnOpen.Size = new System.Drawing.Size(95, 41);
             this.btnOpen.TabIndex = 0;
@@ -58,7 +61,7 @@
             // labMessage
             // 
             this.labMessage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labMessage.Location = new System.Drawing.Point(12, 9);
+            this.labMessage.Location = new System.Drawing.Point(201, 26);
             this.labMessage.Name = "labMessage";
             this.labMessage.Size = new System.Drawing.Size(237, 34);
             this.labMessage.TabIndex = 1;
@@ -66,7 +69,7 @@
             // btnClose
             // 
             this.btnClose.Enabled = false;
-            this.btnClose.Location = new System.Drawing.Point(154, 71);
+            this.btnClose.Location = new System.Drawing.Point(343, 78);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(95, 41);
             this.btnClose.TabIndex = 2;
@@ -76,7 +79,7 @@
             // 
             // btnInsert1
             // 
-            this.btnInsert1.Location = new System.Drawing.Point(12, 142);
+            this.btnInsert1.Location = new System.Drawing.Point(12, 157);
             this.btnInsert1.Name = "btnInsert1";
             this.btnInsert1.Size = new System.Drawing.Size(237, 28);
             this.btnInsert1.TabIndex = 3;
@@ -86,7 +89,7 @@
             // 
             // btnInsert2
             // 
-            this.btnInsert2.Location = new System.Drawing.Point(12, 176);
+            this.btnInsert2.Location = new System.Drawing.Point(12, 191);
             this.btnInsert2.Name = "btnInsert2";
             this.btnInsert2.Size = new System.Drawing.Size(237, 28);
             this.btnInsert2.TabIndex = 3;
@@ -103,7 +106,7 @@
             this.grboxJob2.Controls.Add(this.txtTitle);
             this.grboxJob2.Controls.Add(this.lblTitle);
             this.grboxJob2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grboxJob2.Location = new System.Drawing.Point(286, 77);
+            this.grboxJob2.Location = new System.Drawing.Point(286, 161);
             this.grboxJob2.Name = "grboxJob2";
             this.grboxJob2.Size = new System.Drawing.Size(353, 126);
             this.grboxJob2.TabIndex = 4;
@@ -160,7 +163,7 @@
             // 
             // btnInsert3
             // 
-            this.btnInsert3.Location = new System.Drawing.Point(12, 210);
+            this.btnInsert3.Location = new System.Drawing.Point(12, 225);
             this.btnInsert3.Name = "btnInsert3";
             this.btnInsert3.Size = new System.Drawing.Size(237, 28);
             this.btnInsert3.TabIndex = 3;
@@ -170,7 +173,7 @@
             // 
             // btnInsert4
             // 
-            this.btnInsert4.Location = new System.Drawing.Point(12, 244);
+            this.btnInsert4.Location = new System.Drawing.Point(12, 259);
             this.btnInsert4.Name = "btnInsert4";
             this.btnInsert4.Size = new System.Drawing.Size(237, 28);
             this.btnInsert4.TabIndex = 3;
@@ -178,11 +181,44 @@
             this.btnInsert4.UseVisualStyleBackColor = true;
             this.btnInsert4.Click += new System.EventHandler(this.btnInsert4_Click);
             // 
+            // listBoxJobs
+            // 
+            this.listBoxJobs.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.listBoxJobs.FormattingEnabled = true;
+            this.listBoxJobs.ItemHeight = 16;
+            this.listBoxJobs.Location = new System.Drawing.Point(65, 325);
+            this.listBoxJobs.Name = "listBoxJobs";
+            this.listBoxJobs.Size = new System.Drawing.Size(300, 148);
+            this.listBoxJobs.TabIndex = 5;
+            // 
+            // btnLoadJobs
+            // 
+            this.btnLoadJobs.Location = new System.Drawing.Point(408, 358);
+            this.btnLoadJobs.Name = "btnLoadJobs";
+            this.btnLoadJobs.Size = new System.Drawing.Size(111, 35);
+            this.btnLoadJobs.TabIndex = 6;
+            this.btnLoadJobs.Text = "Cargar Jobs";
+            this.btnLoadJobs.UseVisualStyleBackColor = true;
+            this.btnLoadJobs.Click += new System.EventHandler(this.btnLoadJobs_Click);
+            // 
+            // btnUpdateJob
+            // 
+            this.btnUpdateJob.Location = new System.Drawing.Point(408, 399);
+            this.btnUpdateJob.Name = "btnUpdateJob";
+            this.btnUpdateJob.Size = new System.Drawing.Size(111, 36);
+            this.btnUpdateJob.TabIndex = 7;
+            this.btnUpdateJob.Text = "Modificar Job";
+            this.btnUpdateJob.UseVisualStyleBackColor = true;
+            this.btnUpdateJob.Click += new System.EventHandler(this.btnUpdateJob_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 285);
+            this.ClientSize = new System.Drawing.Size(651, 506);
+            this.Controls.Add(this.btnUpdateJob);
+            this.Controls.Add(this.btnLoadJobs);
+            this.Controls.Add(this.listBoxJobs);
             this.Controls.Add(this.grboxJob2);
             this.Controls.Add(this.btnInsert4);
             this.Controls.Add(this.btnInsert3);
@@ -215,6 +251,9 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnInsert3;
         private System.Windows.Forms.Button btnInsert4;
+        private System.Windows.Forms.ListBox listBoxJobs;
+        private System.Windows.Forms.Button btnLoadJobs;
+        private System.Windows.Forms.Button btnUpdateJob;
     }
 }
 

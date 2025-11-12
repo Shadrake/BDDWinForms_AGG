@@ -23,7 +23,7 @@ namespace WindowsFormsBD
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="AbrilEmpleados")]
-	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
+	public partial class EmpleadosDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
@@ -53,31 +53,31 @@ namespace WindowsFormsBD
     partial void Deletelocation(location instance);
     #endregion
 		
-		public DataClasses1DataContext() : 
+		public EmpleadosDataContext() : 
 				base(global::WindowsFormsBD.Properties.Settings.Default.AbrilEmpleadosConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection) : 
+		public EmpleadosDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+		public EmpleadosDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public EmpleadosDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public EmpleadosDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();

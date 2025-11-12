@@ -1,44 +1,34 @@
 ﻿using BDDWinForms_AGG.Models;
 using System;
-using System.Data;
-using System.Data.SqlClient;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WindowsFormsBD.DAL
 {
     internal class JobDAL
     {
-        // ** 1a parte **
-        SqlConnection connection = null;
-
-        // Definir cadena de conexión, parámetros de acceso
-        string ConStr = "Server=46.183.118.102,54321;" +
-            "Database=AbrilEmpleados;" +
-            "User Id=sa;" +
-            "Password=Sql#123456789;" +
-            "TrustServerCertificate=true";
+        // LINQ to SQL DataContext
+        private EmpleadosDataContext dc;
 
         public JobDAL()
         {
-            connection = new SqlConnection(ConStr);
+            dc = new EmpleadosDataContext();
         }
 
-        // ** 2a parte **
-        // Insertar valores concretos (hard coded)
+        // Insertar valores concretos
         public bool InsertJob1()
         {
             try
             {
-                string sql = @"
-INSERT INTO jobs ([job_title], [min_salary] ,[max_salary])
-VALUES ('Software Developer', 60000, 120000)";
+                job j = new job()
+                {
+                    job_title = "Software Developer",
+                    min_salary = 60000,
+                    max_salary = 120000
+                };
 
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
-                if (connection.State != ConnectionState.Open)
-                    connection.Open();
-
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
+                dc.jobs.InsertOnSubmit(j);
+                dc.SubmitChanges();
             }
             catch (Exception ex)
             {
@@ -47,27 +37,19 @@ VALUES ('Software Developer', 60000, 120000)";
             return true;
         }
 
-        // ** 3a parte **
-        // Insertar Job con parámetros NULLables
         public bool InsertJob2(string title, decimal? minSalary, decimal? maxSalary)
         {
             try
             {
-                string sql = @"
-INSERT INTO jobs ([job_title], [min_salary], [max_salary])
-VALUES (@job_title, @min_salary, @max_salary)";
+                job j = new job()
+                {
+                    job_title = title,
+                    min_salary = minSalary,
+                    max_salary = maxSalary
+                };
 
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
-                if (connection.State != ConnectionState.Open)
-                    connection.Open();
-
-                sqlCommand.Parameters.AddWithValue("@job_title", title);
-                sqlCommand.Parameters.AddWithValue("@min_salary", (object)minSalary ?? DBNull.Value);
-                sqlCommand.Parameters.AddWithValue("@max_salary", (object)maxSalary ?? DBNull.Value);
-
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
+                dc.jobs.InsertOnSubmit(j);
+                dc.SubmitChanges();
             }
             catch (Exception ex)
             {
@@ -76,27 +58,19 @@ VALUES (@job_title, @min_salary, @max_salary)";
             return true;
         }
 
-        // ** 4a parte **
-        // Insertar Job con objeto Job y control de NULLs
-        public bool InsertJob3(Job job)
+        public bool InsertJob3(Job jobModel)
         {
             try
             {
-                string sql = @"
-INSERT INTO jobs ([job_title], [min_salary], [max_salary])
-VALUES (@job_title, @min_salary, @max_salary)";
+                job j = new job()
+                {
+                    job_title = jobModel.job_title,
+                    min_salary = jobModel.min_salary,
+                    max_salary = jobModel.max_salary
+                };
 
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
-
-                if (connection.State != ConnectionState.Open)
-                    connection.Open();
-
-                sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
-                sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
-                sqlCommand.Parameters.AddWithValue("@max_salary", (object)job.max_salary ?? DBNull.Value);
-
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
+                dc.jobs.InsertOnSubmit(j);
+                dc.SubmitChanges();
             }
             catch (Exception ex)
             {
@@ -105,27 +79,64 @@ VALUES (@job_title, @min_salary, @max_salary)";
             return true;
         }
 
-        // ** 5a parte **
-        // Insertar Job con parámetros SQL y objeto Job
-        public bool InsertJob4(Job job)
+        public bool InsertJob4(Job jobModel)
         {
             try
             {
-                string sql = @"
-INSERT INTO jobs ([job_title], [min_salary], [max_salary])
-VALUES (@job_title, @min_salary, @max_salary)";
+                job j = new job()
+                {
+                    job_title = jobModel.job_title,
+                    min_salary = jobModel.min_salary,
+                    max_salary = jobModel.max_salary
+                };
 
-                SqlCommand sqlCommand = new SqlCommand(sql, connection);
+                dc.jobs.InsertOnSubmit(j);
+                dc.SubmitChanges();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+        }
 
-                if (connection.State != ConnectionState.Open)
-                    connection.Open();
+        // Devolver todos los jobs
+        public List<Job> GetAll()
+        {
+            try
+            {
+                var query = from j in dc.jobs
+                            select new Job
+                            {
+                                job_id = j.job_id,
+                                job_title = j.job_title,
+                                min_salary = j.min_salary,
+                                max_salary = j.max_salary
+                            };
 
-                sqlCommand.Parameters.AddWithValue("@job_title", job.job_title);
-                sqlCommand.Parameters.AddWithValue("@min_salary", (object)job.min_salary ?? DBNull.Value);
-                sqlCommand.Parameters.AddWithValue("@max_salary", (object)job.max_salary ?? DBNull.Value);
+                return query.ToList();
+            }
+            catch (Exception ex)
+            {
+                return new List<Job>();
+            }
+        }
 
-                int num = sqlCommand.ExecuteNonQuery();
-                //MessageBox.Show($"{num} filas insertadas!");
+        // Actualizar job existente
+        public bool UpdateJob(Job jobModel)
+        {
+            try
+            {
+                var j = dc.jobs.FirstOrDefault(x => x.job_id == jobModel.job_id);
+                if (j != null)
+                {
+                    j.job_title = jobModel.job_title;
+                    j.min_salary = jobModel.min_salary;
+                    j.max_salary = jobModel.max_salary;
+                    dc.SubmitChanges();
+                }
+                else
+                    return false;
             }
             catch (Exception ex)
             {

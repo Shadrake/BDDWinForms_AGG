@@ -14,3 +14,5 @@ namespace BDDWinForms_AGG.Models
         public decimal? max_salary { get; set; }
     }
 }
+
+
